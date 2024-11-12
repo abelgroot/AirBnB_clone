@@ -1,2 +1,6 @@
+commit.git
 .vscode
 .vscode/*
+models/__pycache__
+tests/test_models/__pycache__
+__pycache__
