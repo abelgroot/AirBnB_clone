@@ -18,19 +18,18 @@ class BaseModel:
             *args (tuple): Unused positional arguments.
             **kwargs (dict): Keyword arguments used to initialize the object.
         """
-        if (kwargs is not None):
-            for key,value in kwargs.iteritems():
-                if key != __class__:
-                    setattr(self,key,value)
-                if "create_at" in kwargs:
-                    self.create_at = datetime.fromisoformat(kwargs["create_at"])
-                if "update_at" in kwargs:
-                    self.update_at = datetime.fromisoformat(kwargs["update_at"])
+        if kwargs:
+            for key, value in kwargs.items():
+                if key == 'created_at' or key == 'updated_at':
+                    # Convert ISO format string to datetime object
+                    value = datetime.fromisoformat(value)
+                if key != '__class__':
+                    setattr(self, key, value)
         else:
+            # Default initialization for new instances
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = self.created_at
-        
 
     def __str__(self):
         """Returns a string representation of the instance."""
