@@ -1,3 +1,4 @@
 .vscode
 .vscode/*
-__pychache__
+models/__pychache__
+tests/test_models/__pychache__
