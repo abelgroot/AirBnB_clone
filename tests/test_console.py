@@ -51,12 +51,22 @@ class TestHBNBCommand(unittest.TestCase):
             self.assertIn("update", output)
 
         # Test help for specific commands
-        commands = ["show", "create", "destroy", "all", "update", "count", "quit"]
+        commands = ["show",
+                    "create",
+                    "destroy",
+                    "all",
+                    "update",
+                    "count",
+                    "quit"
+                    ]
         for cmd in commands:
             with patch("sys.stdout", new=StringIO()) as f:
                 self.console.onecmd(f"help {cmd}")
                 output = f.getvalue().strip()
-                self.assertNotEqual("** No help available for {cmd} **", output)
+                self.assertNotEqual(
+                        "** No help available for {cmd} **",
+                        output
+                        )
                 self.assertTrue(len(output) > 0)
 
     def test_quit_and_EOF(self):
@@ -218,7 +228,10 @@ class TestHBNBCommand(unittest.TestCase):
         # Test update without attribute name
         with patch("sys.stdout", new=StringIO()) as f:
             self.console.onecmd(f"update BaseModel {instance_id}")
-            self.assertEqual("** attribute name missing **", f.getvalue().strip())
+            self.assertEqual(
+                    "** attribute name missing **",
+                    f.getvalue().strip()
+                    )
 
         # Test update without attribute value
         with patch("sys.stdout", new=StringIO()) as f:
