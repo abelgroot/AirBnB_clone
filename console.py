@@ -1,59 +1,102 @@
 #!/usr/bin/python3
-"""
-Console for the Airbnb clone
-"""
+"""Console for the AirBnB clone"""
 
 import cmd
 
 from models import storage
+from models.amenity import Amenity
 from models.base_model import BaseModel
+from models.city import City
+from models.place import Place
+from models.review import Review
+from models.state import State
+from models.user import User
+
+# Dictionary to map class names to class objects
+classes = {
+    "BaseModel": BaseModel,
+    "User": User,
+    "State": State,
+    "City": City,
+    "Amenity": Amenity,
+    "Place": Place,
+    "Review": Review,
+}
 
 
 class HBNBCommand(cmd.Cmd):
-    """Command interpreter for the Airbnb clone"""
+    """Command interpreter for AirBnB clone"""
 
     prompt = "(hbnb) "
-    classes = {"BaseModel": BaseModel}
 
-    def do_create(self, args):
-        """Creates a new instance of BaseModel, saves it, and prints the id"""
-        if not args:
+    def do_create(self, arg):
+        """Create a new instance of a class"""
+        if not arg:
             print("** class name missing **")
             return
-        if args not in self.classes:
+        if arg not in classes:
             print("** class doesn't exist **")
             return
-        # Create and save new instance
-        instance = self.classes[args]()
+        instance = classes[arg]()
         instance.save()
         print(instance.id)
 
-    def do_show(self, args):
-        """Prints the string representation of an instance based on the class name and id"""
-        args = args.split()
-        if len(args) < 1:
+    def do_show(self, arg):
+        """Show the string representation of an instance"""
+        args = arg.split()
+        if len(args) == 0:
             print("** class name missing **")
             return
-        if args[0] not in self.classes:
+        if args[0] not in classes:
             print("** class doesn't exist **")
             return
-        if len(args) < 2:
+        if len(args) == 1:
             print("** instance id missing **")
             return
         key = f"{args[0]}.{args[1]}"
-        instance = storage.all().get(key)
-        if instance is None:
+        if key not in storage.all():
             print("** no instance found **")
-        else:
-            print(instance)
+            return
+        print(storage.all()[key])
 
-    def do_destroy(self, args):
-        """Deletes an instance based on the class name and id"""
-        args = args.split()
+    def do_destroy(self, arg):
+        """Delete an instance"""
+        args = arg.split()
+        if len(args) == 0:
+            print("** class name missing **")
+            return
+        if args[0] not in classes:
+            print("** class doesn't exist **")
+            return
+        if len(args) == 1:
+            print("** instance id missing **")
+            return
+        key = f"{args[0]}.{args[1]}"
+        if key not in storage.all():
+            print("** no instance found **")
+            return
+        del storage.all()[key]
+        storage.save()
+
+    def do_all(self, arg):
+        """Show all instances, or all instances of a class"""
+        if arg and arg not in classes:
+            print("** class doesn't exist **")
+            return
+        objects = [
+            str(obj)
+            for key, obj in storage.all().items()
+            if not arg or key.startswith(arg)
+        ]
+        print(objects)
+
+    def do_update(self, arg):
+        """Update an instance with new attribute values"""
+        args = arg.split()
         if len(args) < 1:
             print("** class name missing **")
             return
-        if args[0] not in self.classes:
+        if args[0] not in classes:
             print("** class doesn't exist **")
             return
         if len(args) < 2:
@@ -62,41 +105,6 @@ class HBNBCommand(cmd.Cmd):
         key = f"{args[0]}.{args[1]}"
         if key not in storage.all():
             print("** no instance found **")
-        else:
-            del storage.all()[key]
-            storage.save()
-
-    def do_all(self, args):
-        """Prints all string representations of instances of a specified class, or all if no class is specified"""
-        if args:
-            if args not in self.classes:
-                print("** class doesn't exist **")
-                return
-            # Filter and display instances of specified class
-            instances = [
-                str(obj) for key, obj in storage.all().items() if key.startswith(args)
-            ]
-        else:
-            # Display all instances
-            instances = [str(obj) for obj in storage.all().values()]
-        print(instances)
-
-    def do_update(self, args):
-        """Updates an instance based on the class name and id by adding or updating attribute"""
-        args = args.split()
-        if len(args) < 1:
-            print("** class name missing **")
-            return
-        if args[0] not in self.classes:
-            print("** class doesn't exist **")
-            return
-        if len(args) < 2:
-            print("** instance id missing **")
-            return
-        key = f"{args[0]}.{args[1]}"
-        instance = storage.all().get(key)
-        if instance is None:
-            print("** no instance found **")
             return
         if len(args) < 3:
             print("** attribute name missing **")
@@ -104,23 +112,24 @@ class HBNBCommand(cmd.Cmd):
         if len(args) < 4:
             print("** value missing **")
             return
+        obj = storage.all()[key]
         attr_name = args[2]
-        attr_value = args[3].strip('"')  # Strip quotes from value if provided
-        setattr(instance, attr_name, attr_value)
-        instance.save()
-
-    def do_quit(self, args):
-        """Quit command to exit the program"""
-        return True
-
-    def do_EOF(self, args):
-        """EOF command to exit the program"""
-        print()
-        return True
+        attr_value = eval(args[3])
+        setattr(obj, attr_name, attr_value)
+        obj.save()
 
     def emptyline(self):
-        """Overrides the default behavior of repeating the last command when an empty line is entered"""
+        """Do nothing on empty line"""
         pass
+
+    def do_quit(self, arg):
+        """Exit the console"""
+        return True
+
+    def do_EOF(self, arg):
+        """Exit the console"""
+        print()
+        return True
 
 
 if __name__ == "__main__":
