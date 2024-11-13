@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-This module defines the BaseModel class that serves as the base class for other models.
+defines the BaseModel class that serves as the base class for other models.
 """
 
 import uuid
@@ -41,7 +41,8 @@ class BaseModel:
         """Updates the updated_at attribute with the current datetime."""
         self.updated_at = datetime.now()
         from models import storage
-        storage.save() # Save the updated instance to storage
+        storage.save()  # Save the updated instance to storage
+
     def to_dict(self):
         """Returns a dictionary containing all keys/values of the instance."""
         dict_repr = self.__dict__.copy()
