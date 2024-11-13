@@ -45,7 +45,7 @@ class FileStorage():
                     # Retrieve the class name of the object from its dictionary representation
                         class_name = value["__class__"]
                     # Dynamically create an instance of the class using globals()
-                        obj = globals()[class_name](**value)
+                        obj = globals()[class_name](**value) #globals(): https://tinyurl.com/bdhn8e46
                     # Store the created object in __objects using the original key
                         self.__objects[key] = obj
                 except json.JSONDecodeError:
