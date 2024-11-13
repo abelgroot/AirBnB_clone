@@ -26,29 +26,27 @@ class FileStorage():
         self.__objects[key] = obj
     
     def save(self):
-        """"This method will convert the dictionary of objects into a JSON format and write it to the file"""
+        """Serializes __objects to the JSON file at __file_path"""
         with open(self.__file_path__, 'w') as f:
-            # Create a dictionary of serialized objects
-            serialized_objects = {}
-            for key, value in self.__objects.items():
-                self.__objects[key] = value.to_dict()
-            json.dump(self.__objects, f)
+            # Convert each object to a dictionary representation
+            json_dict = {key: obj.to_dict() for key, obj in self.__objects.items()}
+            #save the dictionary representation to the json file
+            json.dump(json_dict, f)
 
-#https://appflowy.com/app/77045e94-141f-45c6-b098-28dd2829835f/813e6a91-6c58-45ef-822f-ca5c4c321322
-    def reload(self):
-            """Deserializes the JSON file to __objects """
-            try:
-                if os.path.exists(self.__file_path):
-                    with open(self.__file_path, 'r') as f:
-                        serialised_objects = json.load(f)
-                    for key, value in serialised_objects.items():
-                        class_name = value['__class__']
-                        # self.classes[class name] gets the BaseModel class
-                        # **value unpacks the dictionary into kwargs
-                        instance = self.classes[class_name](**value)
-                        # Store in __objects dictionary
-                        self.__objects[key] = instance
-            except Exception:
-                # If any error occurs, do nothing
-                pass
 
+    def reload(self): # illustration: https://tinyurl.com/yjr3defa
+        """Deserializes the JSON file to __objects if the file exists"""
+        if os.path.exists(self.__file_path__):
+            with open(self.__file_path__, 'r') as f:
+                try:
+                # Load the JSON data from the json file into a dictionary
+                    json_dict = json.load(f)
+                    for key, value in json_dict.items():
+                    # Retrieve the class name of the object from its dictionary representation
+                        class_name = value["__class__"]
+                    # Dynamically create an instance of the class using globals()
+                        obj = globals()[class_name](**value)
+                    # Store the created object in __objects using the original key
+                        self.__objects[key] = obj
+                except json.JSONDecodeError:
+                    pass
