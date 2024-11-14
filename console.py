@@ -28,7 +28,7 @@ class HBNBCommand(cmd.Cmd):
     """Command interpreter for AirBnB clone"""
 
     prompt = "(hbnb) "
-
+    
     def do_create(self, arg):
         """Create a new instance of a class"""
         if not arg:
@@ -140,6 +140,10 @@ class HBNBCommand(cmd.Cmd):
                 print(count)
             else:
                 print("** class doesn't exist **")
+        # Check if the command is in the format `User.destroy("id")`
+        elif line.startswith('User.destroy(\"') and line.endswith('")'):
+            id = line[len('User.destroy(\"'):-2]
+            self.do_destroy(f"User {id}")
         else:
             print("*** Unknown syntax:", line)
 
