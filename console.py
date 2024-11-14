@@ -118,6 +118,31 @@ class HBNBCommand(cmd.Cmd):
         setattr(obj, attr_name, attr_value)
         obj.save()
 
+    def default(self, line):
+        """Handles <class name>.all(), <class name>.count() and similar syntax commands."""
+        if line.endswith(".all()"):
+            class_name = line.split(".")[0]
+            if class_name in classes:
+                self.do_all(class_name)
+            else:
+                print("** class doesn't exist **")
+        elif line.endswith(".count()"):
+            class_name = line.split(".")[0]
+            if class_name in classes:
+                if class_name not in classes:
+                    print("** class doesn't exist **")
+                    return
+                count = sum(
+                    1
+                    for obj in storage.all().values()
+                    if obj.__class__.__name__ == class_name
+                )
+                print(count)
+            else:
+                print("** class doesn't exist **")
+        else:
+            print("*** Unknown syntax:", line)
+
     def emptyline(self):
         """Do nothing on empty line"""
         pass
