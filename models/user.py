@@ -13,3 +13,7 @@ class User(BaseModel):
     password = ""
     first_name = ""
     last_name = ""
+
+    def destroy(self, id):
+        """calls the destroy method"""
+        BaseModel.do_destroy(id)
