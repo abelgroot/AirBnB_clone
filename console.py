@@ -228,13 +228,14 @@ class HBNBCommand(cmd.Cmd):
         """Display help information for commands."""
         if not arg:
             # Display general help for all commands
-            print("Available commands:")
-            print("EOF   - End of file (exit)")
+            print("Documented commands (type help <topic>):")
+            print("========================================")
+            print("EOF   - End of file (quit)")
             print("all   - Show all instances of a class")
             print("create <class_name> - Create a new instance of a class")
             print("destroy <class_name> <id> - Delete an instance of a class")
             print("help - Display this help message")
-            print("quit  - Exit the program")
+            print("quit  - Quit command to exit the program")
             print(
                 "show <class_name> [id] - Show instances\
                 of a class or a specific instance by id"
@@ -277,6 +278,9 @@ class HBNBCommand(cmd.Cmd):
             elif arg == "count":
                 print("Count the number of instances of a class.")
                 print("Syntax: <class_name>.count()")
+            elif arg == "quit":
+                print("Quit command to exit the program")
+                print("Syntax: quit")
             else:
                 print(f"** No help available for {arg} **")
 
