@@ -170,7 +170,8 @@ class HBNBCommand(cmd.Cmd):
         Syntax: <class_name>.count()
         """
         count = sum(
-            1 for key in storage.all().keys() if key.startswith(class_name + ".")
+            1 for key in storage.all().keys()
+            if key.startswith(class_name + ".")
         )
         print(count)
 
@@ -221,20 +222,22 @@ class HBNBCommand(cmd.Cmd):
             print("help - Display this help message")
             print("quit  - Exit the program")
             print(
-                "show <class_name> [id] - Show instances of a class or a specific instance by id"
-            )
+                "show <class_name> [id] - Show instances\
+                of a class or a specific instance by id")
             print(
-                "update <class_name> <id> <attribute_name> <attribute_value> - Update instance attributes"
-            )
+                "update <class_name> <id> <attribute_name> <attribute_value>\
+                - Update instance attributes")
         else:
             # Provide detailed help for specific commands
             if arg == "show":
                 print(
-                    "Show the string representation of an instance or all instances of a class."
-                )
+                    "Show the string representation of an instance or all \
+                    instances of a class.")
                 print("Syntax:")
-                print("  show <class_name> → Display all instances of the class.")
-                print("  show <class_name.id> → Display a specific instance by ID.")
+                print("  show <class_name> → Display all instances of \
+                the class.")
+                print("  show <class_name.id> → Display a specific\
+                 instance by ID.")
             elif arg == "create":
                 print("Create a new instance of a class.")
                 print("Syntax: create <class_name>")
@@ -247,8 +250,8 @@ class HBNBCommand(cmd.Cmd):
             elif arg == "update":
                 print("Update an instance's attribute.")
                 print(
-                    "Syntax: update <class_name> <id> <attribute_name> <attribute_value>"
-                )
+                    "Syntax: update <class_name> <id>\
+                    <attribute_name> <attribute_value>")
             elif arg == "count":
                 print("Count the number of instances of a class.")
                 print("Syntax: <class_name>.count()")
