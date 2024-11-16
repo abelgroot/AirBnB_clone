@@ -210,7 +210,17 @@ class HBNBCommand(cmd.Cmd):
                 elif method_call == "count()":
                     self.do_count(class_name)
                     return
-
+                elif method_call.startswith("destroy("):
+                    instance_id = method_call.strip("destroy(")
+                    if not instance_id.startswith('"'):
+                        print("** instance id wrong1 **")
+                        return
+                    elif not instance_id.endswith('")'):
+                        print("** instance id wrong2 **")
+                        return
+                    instance_id = instance_id.strip('"').strip('")')
+                    self.do_destroy(f"{class_name} {instance_id}")
+                    return
         # If no matching command, fallback to default error
         print(f"*** Unknown syntax: {line}")
 
