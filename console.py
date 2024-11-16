@@ -174,10 +174,6 @@ class HBNBCommand(cmd.Cmd):
         Syntax: <class_name>.count()
         """
         count = 0
-        # count = sum(
-        #     1 for key in storage.all().keys() if key.startswith(class_name + ".")
-        # )
-        # print(count)
         for key in storage.all().keys():
             if key.startswith(class_name + "."):
                 count += 1
