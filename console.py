@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-a command interpreter program for the HBNB clone Project 
+a command interpreter program for the HBNB clone Project
 """
 
 import cmd
