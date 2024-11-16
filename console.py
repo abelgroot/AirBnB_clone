@@ -173,9 +173,14 @@ class HBNBCommand(cmd.Cmd):
         """Count the number of instances of a class.
         Syntax: <class_name>.count()
         """
-        count = sum(
-            1 for key in storage.all().keys() if key.startswith(class_name + ".")
-        )
+        count = 0
+        # count = sum(
+        #     1 for key in storage.all().keys() if key.startswith(class_name + ".")
+        # )
+        # print(count)
+        for key in storage.all().keys():
+            if key.startswith(class_name + "."):
+                count += 1
         print(count)
 
     def default(self, line):
