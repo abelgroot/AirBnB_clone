@@ -133,6 +133,7 @@ class HBNBCommand(cmd.Cmd):
         """Update an instance's attribute.
         Syntax: update <class_name> <id> <attribute_name> <attribute_value>
         """
+        print(arg)
         args = arg.split()
 
         if len(args) == 0:
@@ -221,9 +222,17 @@ class HBNBCommand(cmd.Cmd):
                     instance_id = instance_id.strip('"').strip('")')
                     self.do_destroy(f"{class_name} {instance_id}")
                     return
-        # If no matching command, fallback to default error
-        print(f"*** Unknown syntax: {line}")
+                elif method_call.startswith('update(') and method_call.endswith('")'):
+                    # Extract content between parentheses and split by commas
+                    content = line[line.index('(')+1:line.index(')')]
+                    # Split the extracted content into a list of arguments based on ',' 
+                    # and strip any leading/trailing whitespace or double quotes
+                    args = [arg.strip().strip('"') for arg in content.split(',')]
+                    # Format and execute update
+                    self.do_update(f"{class_name} {args[0]} {args[1]} {args[2]}")
+                    
 
+    
     def do_help(self, arg):
         """Display help information for commands."""
         if not arg:
