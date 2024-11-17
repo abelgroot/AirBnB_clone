@@ -185,6 +185,7 @@ class HBNBCommand(cmd.Cmd):
         tokens = line.split(".")
         if len(tokens) == 2:
             class_name, method_call = tokens
+            m_c = method_call
             if class_name in self.classes:
                 if method_call == "show()":
                     self.do_show(class_name)
@@ -222,17 +223,15 @@ class HBNBCommand(cmd.Cmd):
                     instance_id = instance_id.strip('"').strip('")')
                     self.do_destroy(f"{class_name} {instance_id}")
                     return
-                elif method_call.startswith('update(') and method_call.endswith('")'):
+                elif m_c.startswith("update(") and m_c[-2:] == '")':
                     # Extract content between parentheses and split by commas
-                    content = line[line.index('(')+1:line.index(')')]
-                    # Split the extracted content into a list of arguments based on ',' 
-                    # and strip any leading/trailing whitespace or double quotes
-                    args = [arg.strip().strip('"') for arg in content.split(',')]
+                    raw = line[line.index('(')+1:line.index(')')]
+                # Split the extracted content into a list of args based on ','
+                # and strip any leading/trailing whitespace or "double quotes"
+                    ars = [arg.strip().strip('"') for arg in raw.split(',')]
                     # Format and execute update
-                    self.do_update(f"{class_name} {args[0]} {args[1]} {args[2]}")
-                    
+                    self.do_update(f"{class_name} {ars[0]} {ars[1]} {ars[2]}")
 
-    
     def do_help(self, arg):
         """Display help information for commands."""
         if not arg:
