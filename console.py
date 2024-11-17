@@ -133,7 +133,6 @@ class HBNBCommand(cmd.Cmd):
         """Update an instance's attribute.
         Syntax: update <class_name> <id> <attribute_name> <attribute_value>
         """
-        print(arg)
         args = arg.split()
 
         if len(args) == 0:
@@ -186,6 +185,7 @@ class HBNBCommand(cmd.Cmd):
         if len(tokens) == 2:
             class_name, method_call = tokens
             m_c = method_call
+            c_l = class_name
             if class_name in self.classes:
                 if method_call == "show()":
                     self.do_show(class_name)
@@ -223,14 +223,43 @@ class HBNBCommand(cmd.Cmd):
                     instance_id = instance_id.strip('"').strip('")')
                     self.do_destroy(f"{class_name} {instance_id}")
                     return
-                elif m_c.startswith("update(") and m_c[-2:] == '")':
-                    # Extract content between parentheses and split by commas
+                elif m_c.startswith("update("):
                     raw = line[line.index('(')+1:line.index(')')]
-                # Split the extracted content into a list of args based on ','
-                # and strip any leading/trailing whitespace or "double quotes"
-                    ars = [arg.strip().strip('"') for arg in raw.split(',')]
-                    # Format and execute update
-                    self.do_update(f"{class_name} {ars[0]} {ars[1]} {ars[2]}")
+                    # identify a dictionary
+                    if '{' in raw:
+                        # Split the raw string into before and after 1st comma
+                        parts = raw.split(",", 1)
+
+                        # Ensure there are exactly two parts after the split
+                        if len(parts) == 2:
+                            # Extract and clean the object ID
+                            id = parts[0].strip().strip('"').strip("'")
+
+                        # Evaluate the second part of the split as a dictionary
+                        second_part = eval(parts[1].strip())
+
+                        list = []
+                        # Check if the second part is indeed a dictionary
+                        if isinstance(second_part, dict):
+                            # Flatten the dictonry into a list of keys & values
+                            for key, value in second_part.items():
+                                list.append(key)
+                                list.append(value)
+                            # Iterate list in steps of two (key-value pairs)
+                            for i in range(0, len(list), 2):
+                                key = list[i]
+                                value = list[i + 1]
+                                self.do_update(f"{c_l} {id} {key} {value}")
+
+                        else:
+                            # Split raw into a list of args based on ','
+                            # and strip any whitespace or "double quotes"
+                            ars = [arg.strip().strip('"') for arg in
+                                   raw.split(',')]
+                            # Format and execute update
+                            self.do_update(f"{c_l} {ars[0]} {ars[1]} {ars[2]}")
+                else:
+                    print("*** Unknown syntax:", line)
 
     def do_help(self, arg):
         """Display help information for commands."""
