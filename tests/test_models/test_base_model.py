@@ -49,13 +49,22 @@ class TestBaseModel(unittest.TestCase):
         self.assertTrue(self.model.updated_at > old_updated_at)
 
     def test_to_dict_method(self):
-        """Test that to_dict method returns a correct dictionary representation."""
+        """
+        Test that to_dict method returns a
+        correct dictionary representation.
+        """
         model_dict = self.model.to_dict()
         self.assertTrue(isinstance(model_dict, dict))
         self.assertEqual(model_dict["__class__"], "BaseModel")
         self.assertEqual(model_dict["id"], self.model.id)
-        self.assertEqual(model_dict["created_at"], self.model.created_at.isoformat())
-        self.assertEqual(model_dict["updated_at"], self.model.updated_at.isoformat())
+        self.assertEqual(
+                model_dict["created_at"],
+                self.model.created_at.isoformat()
+                )
+        self.assertEqual(
+                model_dict["updated_at"],
+                self.model.updated_at.isoformat()
+                )
 
     def test_to_dict_contains_added_attributes(self):
         """Test that to_dict includes attributes added after instantiation."""

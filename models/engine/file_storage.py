@@ -48,7 +48,8 @@ class FileStorage:
             json.dump(obj_dict, f)
 
     def reload(self):
-        """Deserializes the JSON file to __objects, if the file exists and is not empty.
+        """Deserializes the JSON file to __objects,
+        if the file exists and is not empty.
         If the file doesn't exist, it creates an empty one."""
         try:
             # Check if the file exists and is not empty
@@ -61,15 +62,19 @@ class FileStorage:
                     for key, value in obj_dict.items():
                         class_name = value["__class__"]
                         if class_name in self.classes:
-                            self.__objects[key] = self.classes[class_name](**value)
+                            self.__objects[key] =\
+                                    self.classes[class_name](**value)
             else:
                 # Create the file if it doesn't exist or is empty
                 with open(self.__file_path, "w") as f:
                     pass
         except json.JSONDecodeError:
-            # Handle case where file exists but contains invalid JSON (corrupted or empty)
+            """Handle case where file exists but
+            contains invalid JSON (corrupted or empty)
+            """
             print(
-                "Invalid or empty JSON file. Continuing with an empty object dictionary."
+                "Invalid or empty JSON file. \
+                        Continuing with an empty object dictionary."
             )
         except Exception as e:
             print(f"An unexpected error occurred: {e}")
