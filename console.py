@@ -254,7 +254,8 @@ class HBNBCommand(cmd.Cmd):
                     else:
                         # Split raw into a list of args based on ','
                         # and strip any whitespace or "double quotes"
-                        ars = [arg.strip().strip('"') for arg in raw.split(',')]
+                        ars = [arg.strip().strip('"') for arg
+                               in raw.split(',')]
                         # Format and execute update
                         self.do_update(f"{c_l} {ars[0]} {ars[1]} {ars[2]}")
                 else:
