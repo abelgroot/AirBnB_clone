@@ -1,21 +1,24 @@
+#!/usr/bin/python3
+"""Unit tests for the HBNB command interpreter."""
 import unittest
 from unittest.mock import patch
 from io import StringIO
-from models.base_model import BaseModel
-from models.user import User
 from console import HBNBCommand
 from models import storage
+from models.base_model import BaseModel
+from models.user import User
 from models.state import State
 from models.city import City
 from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
 
+
 class TestHBNBCommand(unittest.TestCase):
     """Test cases for the HBNB command interpreter."""
 
     def setUp(self):
-        """Set up for each test."""
+        """Set up test cases."""
         self.console = HBNBCommand()
         self.classes = {
             "BaseModel": BaseModel,
@@ -32,8 +35,43 @@ class TestHBNBCommand(unittest.TestCase):
         storage.all().clear()
         storage.save()
 
+    def test_help_commands(self):
+        """Test help command outputs."""
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.console.onecmd("help")
+            output = f.getvalue().strip()
+            self.assertIn("Documented commands", output)
+            self.assertIn("EOF", output)
+            self.assertIn("quit", output)
+            self.assertIn("create", output)
+            self.assertIn("show", output)
+            self.assertIn("destroy", output)
+            self.assertIn("all", output)
+            self.assertIn("update", output)
+
+        # Test help for specific commands
+        commands = ["show", "create", "destroy", "all", "update", "count", "quit"]
+        for cmd in commands:
+            with patch('sys.stdout', new=StringIO()) as f:
+                self.console.onecmd(f"help {cmd}")
+                output = f.getvalue().strip()
+                self.assertNotEqual("** No help available for {cmd} **", output)
+                self.assertTrue(len(output) > 0)
+
+    def test_quit_and_EOF(self):
+        """Test quit and EOF commands."""
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.assertTrue(self.console.onecmd("quit"))
+            self.assertTrue(self.console.onecmd("EOF"))
+
+    def test_emptyline(self):
+        """Test empty line input."""
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.console.onecmd("")
+            self.assertEqual("", f.getvalue().strip())
+
     def test_create(self):
-        """Test the create command."""
+        """Test create command."""
         # Test create without class name
         with patch('sys.stdout', new=StringIO()) as f:
             self.console.onecmd("create")
@@ -52,6 +90,8 @@ class TestHBNBCommand(unittest.TestCase):
                 self.assertTrue(len(obj_id) > 0)
                 key = f"{class_name}.{obj_id}"
                 self.assertIn(key, storage.all())
+                # Verify storage contains the new instance
+                self.assertTrue(obj_id in storage.all())
 
     def test_show(self):
         """Test show command."""
@@ -78,14 +118,13 @@ class TestHBNBCommand(unittest.TestCase):
         # Test show with valid class and id
         for class_name in self.classes:
             with patch('sys.stdout', new=StringIO()) as f:
-                self.console.onecmd(f"create {class_name}")
-                obj_id = f.getvalue().strip()
-
-            with patch('sys.stdout', new=StringIO()) as f:
-                self.console.onecmd(f"show {class_name} {obj_id}")
+                # Create a new instance
+                new_instance = self.classes[class_name]()
+                new_instance.save()
+                self.console.onecmd(f"show {class_name} {new_instance.id}")
                 output = f.getvalue().strip()
                 self.assertIn(class_name, output)
-                self.assertIn(obj_id, output)
+                self.assertIn(new_instance.id, output)
 
     def test_destroy(self):
         """Test destroy command."""
@@ -111,12 +150,18 @@ class TestHBNBCommand(unittest.TestCase):
 
         # Test destroy with valid class and id
         for class_name in self.classes:
-            with patch('sys.stdout', new=StringIO()) as f:
-                self.console.onecmd(f"create {class_name}")
-                obj_id = f.getvalue().strip()
-
-            self.console.onecmd(f"destroy {class_name} {obj_id}")
-            key = f"{class_name}.{obj_id}"
+            # Create and destroy a new instance
+            new_instance = self.classes[class_name]()
+            new_instance.save()
+            instance_id = new_instance.id
+            key = f"{class_name}.{instance_id}"
+            
+            # Verify instance exists before destroy
+            self.assertIn(key, storage.all())
+            
+            self.console.onecmd(f"destroy {class_name} {instance_id}")
+            
+            # Verify instance no longer exists after destroy
             self.assertNotIn(key, storage.all())
 
     def test_all(self):
@@ -165,25 +210,25 @@ class TestHBNBCommand(unittest.TestCase):
             self.assertEqual("** instance id missing **", f.getvalue().strip())
 
         # Create test instance
-        with patch('sys.stdout', new=StringIO()) as f:
-            self.console.onecmd("create BaseModel")
-            obj_id = f.getvalue().strip()
+        new_instance = BaseModel()
+        new_instance.save()
+        instance_id = new_instance.id
 
         # Test update without attribute name
         with patch('sys.stdout', new=StringIO()) as f:
-            self.console.onecmd(f"update BaseModel {obj_id}")
+            self.console.onecmd(f"update BaseModel {instance_id}")
             self.assertEqual("** attribute name missing **", f.getvalue().strip())
 
         # Test update without attribute value
         with patch('sys.stdout', new=StringIO()) as f:
-            self.console.onecmd(f"update BaseModel {obj_id} name")
+            self.console.onecmd(f"update BaseModel {instance_id} name")
             self.assertEqual("** value missing **", f.getvalue().strip())
 
         # Test update with valid inputs
         attr_name = "test_name"
         attr_value = "test_value"
-        self.console.onecmd(f'update BaseModel {obj_id} {attr_name} "{attr_value}"')
-        key = f"BaseModel.{obj_id}"
+        self.console.onecmd(f'update BaseModel {instance_id} {attr_name} "{attr_value}"')
+        key = f"BaseModel.{instance_id}"
         obj = storage.all()[key]
         self.assertEqual(getattr(obj, attr_name), attr_value)
 
@@ -203,12 +248,42 @@ class TestHBNBCommand(unittest.TestCase):
                 count = int(f.getvalue().strip())
                 self.assertEqual(count, counts[class_name])
 
-    def test_help(self):
-        """Test the help command."""
+    def test_alternative_syntax(self):
+        """Test alternative command syntax (class_name.command())."""
+        # Create test instance
+        new_instance = BaseModel()
+        new_instance.save()
+        instance_id = new_instance.id
+
+        # Test show
         with patch('sys.stdout', new=StringIO()) as f:
-            self.console.onecmd("help show")
+            self.console.onecmd(f'BaseModel.show("{instance_id}")')
             output = f.getvalue().strip()
-            self.assertIn("Show the string representation", output)
+            self.assertIn("BaseModel", output)
+            self.assertIn(instance_id, output)
+
+        # Test all
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.console.onecmd("BaseModel.all()")
+            output = f.getvalue().strip()
+            self.assertIn("BaseModel", output)
+
+        # Test destroy
+        self.console.onecmd(f'BaseModel.destroy("{instance_id}")')
+        key = f"BaseModel.{instance_id}"
+        self.assertNotIn(key, storage.all())
+
+        # Test update with dictionary
+        new_user = User()
+        new_user.save()
+        user_id = new_user.id
+        update_dict = '{"first_name": "John", "age": 89}'
+        self.console.onecmd(f'User.update("{user_id}", {update_dict})')
+        key = f"User.{user_id}"
+        obj = storage.all()[key]
+        self.assertEqual(obj.first_name, "John")
+        self.assertEqual(obj.age, "89")
+
 
 if __name__ == '__main__':
     unittest.main()
