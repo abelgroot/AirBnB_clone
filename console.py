@@ -251,13 +251,12 @@ class HBNBCommand(cmd.Cmd):
                                 value = list[i + 1]
                                 self.do_update(f"{c_l} {id} {key} {value}")
 
-                        else:
-                            # Split raw into a list of args based on ','
-                            # and strip any whitespace or "double quotes"
-                            ars = [arg.strip().strip('"') for arg in
-                                   raw.split(',')]
-                            # Format and execute update
-                            self.do_update(f"{c_l} {ars[0]} {ars[1]} {ars[2]}")
+                    else:
+                        # Split raw into a list of args based on ','
+                        # and strip any whitespace or "double quotes"
+                        ars = [arg.strip().strip('"') for arg in raw.split(',')]
+                        # Format and execute update
+                        self.do_update(f"{c_l} {ars[0]} {ars[1]} {ars[2]}")
                 else:
                     print("*** Unknown syntax:", line)
 
