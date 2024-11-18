@@ -91,7 +91,7 @@ class TestHBNBCommand(unittest.TestCase):
                 key = f"{class_name}.{obj_id}"
                 self.assertIn(key, storage.all())
                 # Verify storage contains the new instance
-                self.assertTrue(obj_id in storage.all())
+                # self.assertTrue(obj_id in storage.all())
 
     def test_show(self):
         """Test show command."""
