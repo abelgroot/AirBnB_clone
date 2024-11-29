@@ -5,3 +5,4 @@ models/__pycache__
 tests/test_models/__pycache__
 __pycache__
 test_
+w3c_validator.py
