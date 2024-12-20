@@ -6,3 +6,4 @@ tests/test_models/__pycache__
 __pycache__
 test_
 w3c_validator.py
+.DS_Store
