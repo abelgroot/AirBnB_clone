@@ -14,3 +14,4 @@ web_static/include
 web_static/w3c_validator.py
 web_static/requests
 web_static/install
+web_static/pyvenv.cfg
