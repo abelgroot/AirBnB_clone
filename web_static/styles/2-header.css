@@ -9,6 +9,10 @@ header {
 	align-items: center;
 	padding: 0 20px;
 }
+
+/* Logo styling */
 header img {
-	height: 50px; /* Adjust logo height */
+	height: 40px; /* Resize logo to fit social media-like size */
+	width: auto;  /* Maintain aspect ratio */
+	margin-right: 20px; /* Add space between logo and any following content */
 }
