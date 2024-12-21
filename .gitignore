@@ -7,3 +7,9 @@ __pycache__
 test_
 w3c_validator.py
 .DS_Store
+web_static/bin
+web_static/lib
+web_static/include
+web_static/w3c_validator.py
+web_static/requets
+web_static/install
