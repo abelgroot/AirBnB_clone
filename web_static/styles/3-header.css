@@ -1,19 +1,12 @@
 /* Header styles */
 header {
     background-color: white; /* White background */
-    color: #484848;
+    color: #484848; /* Font color (if needed in the future) */
     height: 70px;
     width: 100%;
     border-bottom: 1px solid #CCCCCC; /* Light gray border */
     display: flex;
     align-items: center; /* Center content vertically */
-    padding: 0 20px; /* Add padding */
+    padding: 0 20px; /* Add padding if content is added */
     box-sizing: border-box;
-}
-
-/* Logo styles */
-.logo img {
-    height: 50px; /* Prevent the logo from becoming too big */
-    width: 40px; /* Maintain aspect ratio */
-    display: block; /* Ensures no extra space below the image */
 }
