@@ -1,12 +1,19 @@
-/* Header styles */
+/* Header styling */
 header {
-    background-color: white; /* White background */
-    color: #484848; /* Font color (if needed in the future) */
-    height: 70px;
-    width: 100%;
-    border-bottom: 1px solid #CCCCCC; /* Light gray border */
-    display: flex;
-    align-items: center; /* Center content vertically */
-    padding: 0 20px; /* Add padding if content is added */
-    box-sizing: border-box;
+  background-color: white;
+  height: 70px;
+  width: 100%;
+  border-bottom: 1px solid #cccccc;
+  display: flex;
+  align-items: center;
+  padding-left: 20px; /* Add padding to the left for spacing */
+}
+
+/* Logo styling */
+header .logo {
+  background-image: url("../images/abnb.png");
+  background-repeat: no-repeat;
+  background-size: contain; /* Ensure the logo fits within the container */
+  height: 60px; /* Adjust height as needed */
+  width: 140px; /* Adjust width as needed */
 }

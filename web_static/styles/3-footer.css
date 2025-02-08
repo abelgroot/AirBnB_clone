@@ -1,20 +1,17 @@
-/* Footer styles */
+/* Footer styling */
 footer {
-    background-color: white; /* White background */
-    color: #484848; /* Font color */
-    height: 60px;
-    width: 100%;
-    border-top: 1px solid #CCCCCC; /* Light gray border */
-    position: fixed; /* Sticks footer to the bottom of the viewport */
-    bottom: 0;
-    left: 0;
-    display: flex;
-    align-items: center; /* Center content vertically */
-    justify-content: center; /* Center content horizontally */
-    text-align: center;
-    padding: 0;
-    margin: 0;
+  background-color: white;
+  height: 60px;
+  width: 100%;
+  border-top: 1px solid #cccccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
 }
-footer p {
-    margin: 0; /* Ensure no extra spacing around the text */
+
+/* Text styling in footer */
+footer span {
+  color: black;
 }
