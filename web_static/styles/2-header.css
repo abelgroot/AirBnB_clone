@@ -1,19 +1,6 @@
-/* Header styles */
+/* Header styling */
 header {
-    background-color: white; /* White background */
-    color: #484848;
-    height: 70px;
-    width: 100%;
-    border-bottom: 1px solid #CCCCCC; /* Light gray border */
-    display: flex;
-    align-items: center; /* Center content vertically */
-    padding: 0 20px; /* Add padding */
-    box-sizing: border-box;
-}
-
-/* Logo styles */
-.logo img {
-    height: 50px; /* Prevent the logo from becoming too big */
-    width: 40px; /* Maintain aspect ratio */
-    display: block; /* Ensures no extra space below the image */
+  background-color: #ff0000;
+  height: 70px;
+  width: 100%;
 }
