@@ -1,0 +1,32 @@
+/* Filters section styling */
+.filters {
+  background-color: white;
+  height: 50px;
+  width: 90%;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+/* Search button styling */
+.filters button {
+  font-size: 18px;
+  background-color: #ff5a5f;
+  color: #ffffff;
+  height: 40px;
+  width: 15%;
+  border: none;
+  border-radius: 4px;
+  position: absolute;
+  right: 30px;
+  top: 50%;
+  transform: translateY(-50%); /* Center vertically */
+  cursor: pointer;
+}
+
+/* Hover effect for the button */
+.filters button:hover {
+  opacity: 0.9;
+}
