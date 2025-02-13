@@ -97,84 +97,90 @@
   text-align: left;
 }
 
-.amenities h2 {
+/* Amenities section (scoped to places article) */
+.places article .amenities {
+  margin-top: 40px;
+  flex-grow: 1; /* Allow amenities section to grow and fill space */
+}
+
+.places article .amenities h2 {
   font-size: 16px;
   border-bottom: 1px solid #dddddd;
   padding-bottom: 10px;
 }
 
-.amenities ul {
+.places article .amenities ul {
   list-style: none;
   padding: 0;
 }
 
-.amenities li {
+.places article .amenities li {
   padding: 5px 0;
   display: flex;
   align-items: center;
 }
 
 /* Icons for amenities */
-.amenities li::before {
+.places article .amenities li::before {
   margin-right: 10px;
   font-size: 20px;
 }
 
-.amenities li[data-icon="pet-friendly"]::before {
+.places article .amenities li[data-icon="pet-friendly"]::before {
   content: "🐾"; /* Pet-friendly icon */
 }
 
-.amenities li[data-icon="tv"]::before {
+.places article .amenities li[data-icon="tv"]::before {
   content: "📺"; /* TV icon */
 }
 
-.amenities li[data-icon="wifi"]::before {
+.places article .amenities li[data-icon="wifi"]::before {
   content: "📶"; /* Wi-Fi icon */
 }
 
-.amenities li[data-icon="kitchen"]::before {
+.places article .amenities li[data-icon="kitchen"]::before {
   content: "🍳"; /* Kitchen icon */
 }
 
-.amenities li[data-icon="pool"]::before {
+.places article .amenities li[data-icon="pool"]::before {
   content: "🏊"; /* Pool icon */
 }
 
-.amenities li[data-icon="parking"]::before {
+.places article .amenities li[data-icon="parking"]::before {
   content: "🅿️"; /* Parking icon */
 }
 
-.amenities li[data-icon="beach-access"]::before {
+.places article .amenities li[data-icon="beach-access"]::before {
   content: "🏖️"; /* Beach access icon */
 }
 
-/* Reviews section */
-.reviews {
+/* Reviews section (scoped to places article) */
+.places article .reviews {
   margin-top: 40px;
   flex-grow: 1; /* Allow reviews section to grow and fill space */
 }
 
-.reviews h2 {
+.places article .reviews h2 {
   font-size: 16px;
   border-bottom: 1px solid #dddddd;
   padding-bottom: 10px;
 }
 
-.reviews ul {
+.places article .reviews ul {
   list-style: none;
   padding: 0;
 }
 
-.reviews li {
+.places article .reviews li {
   margin-bottom: 20px;
 }
 
-.reviews h3 {
+.places article .reviews h3 {
   font-size: 14px;
   margin: 0;
 }
 
-.reviews p {
+.places article .reviews p {
   font-size: 12px;
   margin: 5px 0;
 }
