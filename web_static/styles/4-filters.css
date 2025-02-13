@@ -1,8 +1,8 @@
 /* Filters section styling */
 .filters {
   background-color: white;
-  height: 50px;
-  width: 90%;
+  height: 70px;
+  width: 100%;
   border: 1px solid #dddddd;
   border-radius: 4px;
   display: flex;
