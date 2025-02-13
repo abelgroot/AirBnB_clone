@@ -1,0 +1,29 @@
+/* Global body styling */
+body {
+  margin: 0;
+  padding: 0;
+  color: #333; /* Improved contrast */
+  font-size: 14px;
+  font-family: Circular, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  line-height: 1.5; /* Improved readability */
+}
+
+/* Container styling */
+.container {
+  max-width: 1000px;
+  margin: 30px auto; /* Center horizontally and add margin top/bottom */
+  padding: 0 20px; /* Add padding for smaller screens */
+  box-sizing: border-box; /* Ensure padding is included in the width */
+}
+
+/* Visually hidden utility class */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}

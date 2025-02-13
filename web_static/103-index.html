@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="AirBnB Clone - Find your perfect place to stay."
+    />
+    <title>Header, Filters, Footer, and Places with Details</title>
+    <link rel="stylesheet" href="styles/103-common.css" />
+    <link rel="stylesheet" href="styles/103-header.css" />
+    <link rel="stylesheet" href="styles/103-footer.css" />
+    <link rel="stylesheet" href="styles/103-filters.css" />
+    <link rel="stylesheet" href="styles/103-places.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header role="banner">
+      <div class="logo" aria-label="AirBnB logo"></div>
+    </header>
+
+    <!-- Main Content -->
+    <main role="main">
+      <!-- Container -->
+      <div class="container">
+        <!-- Filters Section -->
+        <section class="filters" aria-labelledby="filters-heading">
+          <h1 id="filters-heading" class="visually-hidden">Filters</h1>
+          <div
+            class="locations"
+            role="region"
+            aria-labelledby="locations-heading"
+          >
+            <h2 id="locations-heading">States</h2>
+            <h3>Some fake content</h3>
+            <ul class="popover" role="list">
+              <li>
+                <h4>California</h4>
+                <ul role="list">
+                  <li>Los Angeles</li>
+                  <li>San Francisco</li>
+                  <li>San Diego</li>
+                </ul>
+              </li>
+              <li>
+                <h4>Texas</h4>
+                <ul role="list">
+                  <li>Houston</li>
+                  <li>Dallas</li>
+                  <li>Austin</li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <div
+            class="amenities"
+            role="region"
+            aria-labelledby="amenities-heading"
+          >
+            <h2 id="amenities-heading">Amenities</h2>
+            <h3>Some fake content</h3>
+            <ul class="popover" role="list">
+              <li>Wi-Fi</li>
+              <li>Swimming Pool</li>
+              <li>Parking</li>
+            </ul>
+          </div>
+          <button aria-label="Search">Search</button>
+        </section>
+
+        <!-- Places Section -->
+        <section class="places" aria-labelledby="places-heading">
+          <h1 id="places-heading">Places</h1>
+
+          <!-- Cozy Apartment -->
+          <article role="article" aria-labelledby="cozy-apartment-heading">
+            <h2 id="cozy-apartment-heading">Cozy Apartment</h2>
+            <div class="price_by_night" aria-label="Price by night: $120">
+              $120
+            </div>
+            <div class="information">
+              <div class="max_guest" aria-label="2 Guests">👤 2 Guests</div>
+              <div class="number_rooms" aria-label="1 Bedroom">
+                🛏️ 1 Bedroom
+              </div>
+              <div class="number_bathrooms" aria-label="1 Bathroom">
+                🚿 1 Bathroom
+              </div>
+            </div>
+            <div class="user"><strong>Owner:</strong> John Doe</div>
+            <div class="description">
+              A beautiful and cozy apartment located in the heart of the city,
+              close to public transportation and shopping centers.
+            </div>
+            <!-- Amenities Section -->
+            <div
+              class="amenities"
+              aria-labelledby="cozy-apartment-amenities-heading"
+            >
+              <h2 id="cozy-apartment-amenities-heading">Amenities</h2>
+              <ul role="list">
+                <li data-icon="pet-friendly">Pet friendly</li>
+                <li data-icon="tv">TV</li>
+                <li data-icon="wifi">Wi-Fi</li>
+                <li data-icon="kitchen">Kitchen</li>
+              </ul>
+            </div>
+            <!-- Reviews Section -->
+            <div
+              class="reviews"
+              aria-labelledby="cozy-apartment-reviews-heading"
+            >
+              <h2 id="cozy-apartment-reviews-heading">Reviews</h2>
+              <ul role="list">
+                <li>
+                  <h3>From Bob Dylan the 27th January 2017</h3>
+                  <p>Great place! Very cozy and well-located.</p>
+                </li>
+                <li>
+                  <h3>From Jane Doe the 15th March 2018</h3>
+                  <p>Loved the apartment, perfect for a weekend getaway.</p>
+                </li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- Luxury Villa -->
+          <article role="article" aria-labelledby="luxury-villa-heading">
+            <h2 id="luxury-villa-heading">Luxury Villa</h2>
+            <div class="price_by_night" aria-label="Price by night: $350">
+              $350
+            </div>
+            <div class="information">
+              <div class="max_guest" aria-label="6 Guests">👤 6 Guests</div>
+              <div class="number_rooms" aria-label="3 Bedrooms">
+                🛏️ 3 Bedrooms
+              </div>
+              <div class="number_bathrooms" aria-label="2 Bathrooms">
+                🚿 2 Bathrooms
+              </div>
+            </div>
+            <div class="user"><strong>Owner:</strong> Alice Smith</div>
+            <div class="description">
+              A stunning villa with breathtaking ocean views, a private pool,
+              and modern amenities for a luxurious stay.
+            </div>
+            <!-- Amenities Section -->
+            <div
+              class="amenities"
+              aria-labelledby="luxury-villa-amenities-heading"
+            >
+              <h2 id="luxury-villa-amenities-heading">Amenities</h2>
+              <ul role="list">
+                <li data-icon="pool">Swimming Pool</li>
+                <li data-icon="tv">TV</li>
+                <li data-icon="wifi">Wi-Fi</li>
+                <li data-icon="parking">Parking</li>
+              </ul>
+            </div>
+            <!-- Reviews Section -->
+            <div class="reviews" aria-labelledby="luxury-villa-reviews-heading">
+              <h2 id="luxury-villa-reviews-heading">Reviews</h2>
+              <ul role="list">
+                <li>
+                  <h3>From Michael Brown the 10th July 2019</h3>
+                  <p>Absolutely amazing! The views are breathtaking.</p>
+                </li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- Beach House -->
+          <article role="article" aria-labelledby="beach-house-heading">
+            <h2 id="beach-house-heading">Beach House</h2>
+            <div class="price_by_night" aria-label="Price by night: $200">
+              $200
+            </div>
+            <div class="information">
+              <div class="max_guest" aria-label="4 Guests">👤 4 Guests</div>
+              <div class="number_rooms" aria-label="2 Bedrooms">
+                🛏️ 2 Bedrooms
+              </div>
+              <div class="number_bathrooms" aria-label="1 Bathroom">
+                🚿 1 Bathroom
+              </div>
+            </div>
+            <div class="user"><strong>Owner:</strong> Michael Brown</div>
+            <div class="description">
+              A beautiful beach house perfect for a relaxing getaway, just steps
+              from the sandy shore.
+            </div>
+            <!-- Amenities Section -->
+            <div
+              class="amenities"
+              aria-labelledby="beach-house-amenities-heading"
+            >
+              <h2 id="beach-house-amenities-heading">Amenities</h2>
+              <ul role="list">
+                <li data-icon="pet-friendly">Pet friendly</li>
+                <li data-icon="tv">TV</li>
+                <li data-icon="wifi">Wi-Fi</li>
+                <li data-icon="beach-access">Beach Access</li>
+              </ul>
+            </div>
+            <!-- Reviews Section -->
+            <div class="reviews" aria-labelledby="beach-house-reviews-heading">
+              <h2 id="beach-house-reviews-heading">Reviews</h2>
+              <ul role="list">
+                <li>
+                  <h3>From Sarah Johnson the 5th August 2020</h3>
+                  <p>Perfect location right by the beach. Highly recommend!</p>
+                </li>
+              </ul>
+            </div>
+          </article>
+        </section>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer role="contentinfo">
+      <span>Best School</span>
+    </footer>
+  </body>
+</html>

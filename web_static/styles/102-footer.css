@@ -1,0 +1,17 @@
+/* Footer styling */
+footer {
+  background-color: white;
+  height: 60px;
+  width: 100%;
+  border-top: 1px solid #cccccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+}
+
+/* Text styling in footer */
+footer span {
+  color: black;
+}
