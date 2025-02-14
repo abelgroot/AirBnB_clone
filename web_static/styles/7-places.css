@@ -1,0 +1,36 @@
+/* Places section styling */
+.places {
+  margin-top: 30px;
+  width: 100%;
+}
+
+/* Places title */
+.places h1 {
+  font-size: 30px;
+  margin-bottom: 20px;
+  text-align: left;
+  width: 100%;
+}
+
+/* Places container */
+.places {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* Ensure h1 is on its own line */
+.places h1 {
+  display: block;
+}
+
+/* Individual place article */
+.places article {
+  width: 390px;
+  padding: 20px;
+  margin: 20px;
+  border: 1px solid #ff5a5f;
+  border-radius: 4px;
+  text-align: center;
+}

@@ -6,14 +6,14 @@ header {
   border-bottom: 1px solid #cccccc;
   display: flex;
   align-items: center;
-  padding-left: 20px; /* Add padding to the left for spacing */
+  padding-left: 20px;
 }
 
 /* Logo styling */
 header .logo {
   background-image: url("../images/abnb.png");
   background-repeat: no-repeat;
-  background-size: contain; /* Ensure the logo fits within the container */
-  height: 60px; /* Adjust height as needed */
-  width: 140px; /* Adjust width as needed */
+  background-size: contain;
+  height: 60px;
+  width: 140px;
 }

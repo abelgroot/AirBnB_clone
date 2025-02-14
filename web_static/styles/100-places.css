@@ -1,0 +1,186 @@
+/* Places section styling */
+.places {
+  margin-top: 30px;
+  width: 100%;
+}
+
+/* Places title */
+.places h1 {
+  font-size: 30px;
+  margin-bottom: 20px;
+  text-align: left;
+  width: 100%;
+}
+
+/* Places container */
+.places {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch; /* Ensure all articles stretch to the same height */
+}
+
+/* Individual place article */
+.places article {
+  width: 390px;
+  padding: 20px;
+  margin: 20px;
+  border: 1px solid #ff5a5f;
+  border-radius: 4px;
+  text-align: center;
+  position: relative;
+  padding-top: 50px; /* Added space for the circular price */
+  display: flex;
+  flex-direction: column;
+  min-height: 600px; /* Set a minimum height to ensure consistency */
+}
+
+/* Title & Price in one row */
+.places article h2 {
+  font-size: 30px;
+  margin: 0;
+  text-align: left;
+}
+
+/* Circular Price per Night */
+.price_by_night {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  color: #ff5a5f;
+  font-size: 30px;
+  border: 4px solid #ff5a5f;
+  border-radius: 50%; /* Makes it a circle */
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  font-weight: bold;
+}
+
+/* Information section */
+.information {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+  border-top: 1px solid #dddddd;
+  border-bottom: 1px solid #dddddd;
+  margin-top: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+/* Information items */
+.max_guest,
+.number_rooms,
+.number_bathrooms {
+  width: 100px;
+  text-align: center;
+}
+
+/* User section */
+.user {
+  margin-top: 10px;
+  text-align: left;
+}
+
+.user strong {
+  font-weight: bold;
+}
+
+/* Description section */
+.description {
+  margin-top: 10px;
+  text-align: left;
+}
+
+/* Amenities section (scoped to places article) */
+.places article .amenities {
+  margin-top: 40px;
+  flex-grow: 1; /* Allow amenities section to grow and fill space */
+}
+
+.places article .amenities h2 {
+  font-size: 16px;
+  border-bottom: 1px solid #dddddd;
+  padding-bottom: 10px;
+}
+
+.places article .amenities ul {
+  list-style: none;
+  padding: 0;
+}
+
+.places article .amenities li {
+  padding: 5px 0;
+  display: flex;
+  align-items: center;
+}
+
+/* Icons for amenities */
+.places article .amenities li::before {
+  margin-right: 10px;
+  font-size: 20px;
+}
+
+.places article .amenities li[data-icon="pet-friendly"]::before {
+  content: "🐾"; /* Pet-friendly icon */
+}
+
+.places article .amenities li[data-icon="tv"]::before {
+  content: "📺"; /* TV icon */
+}
+
+.places article .amenities li[data-icon="wifi"]::before {
+  content: "📶"; /* Wi-Fi icon */
+}
+
+.places article .amenities li[data-icon="kitchen"]::before {
+  content: "🍳"; /* Kitchen icon */
+}
+
+.places article .amenities li[data-icon="pool"]::before {
+  content: "🏊"; /* Pool icon */
+}
+
+.places article .amenities li[data-icon="parking"]::before {
+  content: "🅿️"; /* Parking icon */
+}
+
+.places article .amenities li[data-icon="beach-access"]::before {
+  content: "🏖️"; /* Beach access icon */
+}
+
+/* Reviews section (scoped to places article) */
+.places article .reviews {
+  margin-top: 40px;
+  flex-grow: 1; /* Allow reviews section to grow and fill space */
+}
+
+.places article .reviews h2 {
+  font-size: 16px;
+  border-bottom: 1px solid #dddddd;
+  padding-bottom: 10px;
+}
+
+.places article .reviews ul {
+  list-style: none;
+  padding: 0;
+}
+
+.places article .reviews li {
+  margin-bottom: 20px;
+}
+
+.places article .reviews h3 {
+  font-size: 14px;
+  margin: 0;
+}
+
+.places article .reviews p {
+  font-size: 12px;
+  margin: 5px 0;
+}

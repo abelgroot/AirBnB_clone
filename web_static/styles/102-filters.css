@@ -1,0 +1,117 @@
+/* Filters section styling */
+.filters {
+  background-color: white;
+  height: 70px;
+  width: 100%;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+  padding: 10px; /* Add padding for smaller screens */
+}
+
+/* Filters box (locations and amenities) */
+.filters .locations,
+.filters .amenities {
+  height: 100%;
+  width: 25%;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  box-sizing: border-box; /* Ensure padding is included in the width */
+}
+
+.filters .locations {
+  border-right: 1px solid #dddddd; /* Add a border between locations and amenities */
+}
+
+/* Titles inside filters */
+.filters h3 {
+  font-weight: 600;
+  margin: 0;
+}
+
+.filters h4 {
+  font-weight: 400;
+  font-size: 14px;
+  margin: 5px 0 0;
+}
+
+/* Popover dropdown */
+.popover {
+  display: none;
+  position: absolute;
+  top: 100%; /* Position below the filter box */
+  left: 0;
+  width: 100%;
+  background-color: #fafafa;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  padding: 10px 0;
+  list-style: none;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+
+/* Popover items */
+.popover li {
+  padding: 5px 20px;
+}
+
+/* State name styling */
+.popover h2 {
+  font-size: 16px;
+  margin: 10px 20px;
+}
+
+/* Nested cities list */
+.popover ul {
+  list-style: none;
+  padding-left: 20px;
+}
+
+/* Show popover on hover */
+.locations:hover .popover,
+.amenities:hover .popover {
+  display: block;
+}
+
+/* Search button styling */
+.filters button {
+  font-size: 18px;
+  background-color: #ff5a5f;
+  color: #ffffff;
+  height: 48px;
+  width: 20%;
+  border: none;
+  border-radius: 4px;
+  position: absolute;
+  right: 30px;
+  top: 50%;
+  transform: translateY(-50%); /* Center vertically */
+  cursor: pointer;
+}
+
+/* Hover effect for the button */
+.filters button:hover {
+  opacity: 0.9;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+  .filters .locations,
+  .filters .amenities {
+    width: 50%; /* Adjust width for smaller screens */
+  }
+
+  .filters button {
+    width: 100%; /* Full width for smaller screens */
+    position: static;
+    transform: none;
+    margin-top: 10px; /* Add margin for spacing */
+  }
+}
